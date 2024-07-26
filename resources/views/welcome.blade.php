@@ -16,13 +16,30 @@
             color: #fff;
         }
         .dropdown-menu {
-            right: 0;
-            left: auto;
+            right: auto;
+            left: 0;
+        }
+        .navbar-toggler {
+            margin-left: 0;
+        }
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         @media (max-width: 767px) {
             .search-container {
                 flex-direction: column;
             }
+            .navbar-brand {
+                position: static;
+                transform: none;
+            }
+        }
+        .navbar-nav .nav-item .dropdown-menu {
+            position: absolute;
+            will-change: transform;
+            overflow: visible;
         }
     </style>
 </head>
@@ -33,24 +50,37 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand" href="#">Data Persebaran Pokdakan Kabupaten Banyumas</a>
             <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarToggle">
-                <div class="navbar-text">
-                    <span class="mr-3">
-                        <a class="navbar-brand" href="#">Data Persebaran Pokdakan Kabupaten Banyumas</a>
-                    </span>
-                </div>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="navbar-toggler-icon"></span>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="viewport">
+                            Menu
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/">Home</a>
                             <a class="dropdown-item" href="/tentang">Tentang Website</a>
                             <a class="dropdown-item" href="/petunjuk">Petunjuk Penggunaan Website</a>
                         </div>
                     </li>
                 </ul>
+                @auth
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-link nav-link" style="color: #fff;">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+                @endauth
+                @guest
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}" style="color: #fff;">Login</a>
+                    </li>
+                </ul>
+                @endguest
             </div>
         </div>
     </nav>
@@ -68,9 +98,11 @@
             </div>
             <div class="col-12">
                 <div id="map" class="mt-4"></div>
+                @auth
                 <div class="text-center mt-4">
                     <a href="/input" class="btn btn-primary mb-4">Tambah Data Kelompok</a>
                 </div>
+                @endauth
             </div>
         </div>
     </div>
@@ -136,7 +168,7 @@
                             <p id="detail_siklus_tahun"></p>
                         </div>
                         <div class="form-group">
-                            <label>Tahun Terakhir Menerima Bantuan:</label>
+                            <label>Bantuan:</label>
                             <p id="detail_bantuan"></p>
                         </div>
                     </form>
@@ -148,26 +180,40 @@
         </div>
     </div>
 
+    <!-- SweetAlert2 untuk konfirmasi hapus -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
     var initialView = {
-        center: [-7.42751, 109.22631],
+        center: [-7.423007307477761, 109.24186484513977],
         zoom: 14
     };
 
     var map = L.map('map').setView(initialView.center, initialView.zoom);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Fahmi'
     }).addTo(map);
 
+    var markers = [];
     var kelompokData = @json($kelompokData);
 
-    var markers = [];
+    // Tambahkan marker berwarna hijau untuk Dinas Perikanan dan Peternakan Kabupaten Banyumas
+    var greenIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+    var dinasMarker = L.marker([-7.423007307477761, 109.24186484513977], { icon: greenIcon }).addTo(map)
+        .bindTooltip('Dinas Perikanan dan Peternakan Kabupaten Banyumas', { permanent: true, className: 'custom-tooltip', offset: [0, -10] });
+
+    var customTooltip = L.divIcon({ className: 'custom-tooltip', offset: [0, -10] });
 
     kelompokData.forEach(function(kelompok) {
         var koordinat = kelompok.koordinat_lokasi.split(',');
@@ -181,22 +227,32 @@
             tampilkanModalDetail(kelompok);
         });
 
-        marker.on('contextmenu', function(e) {
-            e.originalEvent.preventDefault();
+        @auth
+    marker.on('contextmenu', function(e) {
+        e.originalEvent.preventDefault();
 
-            Swal.fire({
-                title: 'Pilih Aksi',
-                showCancelButton: true,
-                confirmButtonText: `Edit`,
-                cancelButtonText: `Batal`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    tampilkanModalEdit(kelompok);
-                } else if (result.isDenied) {
-                    konfirmasiHapus(kelompok);
-                }
-            });
+        Swal.fire({
+            title: 'Pilih Aksi',
+            showCancelButton: true,
+            showDenyButton: true,
+            confirmButtonText: 'Edit',
+            denyButtonText: 'Hapus',      // Tombol deny
+            cancelButtonText: 'Batal',   // Tombol cancel
+            customClass: {
+                confirmButton: 'btn btn-primary',  // Warna biru untuk Edit
+                denyButton: 'btn btn-danger',      // Warna merah untuk Hapus
+                cancelButton: 'btn btn-secondary' // Warna abu-abu untuk Cancel
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                tampilkanModalEdit(kelompok);  // Jika Edit dipilih
+            } else if (result.isDenied) {
+                konfirmasiHapus(kelompok);     // Jika Hapus dipilih
+            }
+        // Tidak perlu menambahkan kode untuk cancelButton, karena pop-up otomatis tertutup
         });
+    });
+    @endauth
 
         markers.push({ marker: marker, kelompok: kelompok });
     });
@@ -220,7 +276,35 @@
     }
 
     function tampilkanModalEdit(kelompok) {
-    window.location.href = '/edit/' + kelompok.id;
+        window.location.href = '/edit/' + kelompok.id;
+    }
+
+    function konfirmasiHapus(kelompok) {
+        Swal.fire({
+            title: 'Konfirmasi Hapus',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/kelompok/' + kelompok.id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
+                        map.removeLayer(markers.find(m => m.kelompok.id === kelompok.id).marker);
+                    },
+                    error: function() {
+                        Swal.fire('Gagal!', 'Terjadi kesalahan saat menghapus data.', 'error');
+                    }
+                });
+            }
+        });
     }
 
     // Fungsi untuk pencarian dan zoom

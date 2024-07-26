@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     <style>
-        #map { height: 400px; }
         .navbar {
             background-color: #007bff;
         }
@@ -17,8 +16,16 @@
             color: #fff;
         }
         .dropdown-menu {
-            right: 0;
-            left: auto;
+            right: auto;
+            left: 0;
+        }
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        p {
+            text-align: justify;
         }
     </style>
 </head>
@@ -29,16 +36,12 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand" href="#">Data Persebaran Pokdakan Kabupaten Banyumas</a>
             <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarToggle">
-                <div class="navbar-text">
-                    <span class="mr-3">
-                        <a class="navbar-brand" href="#">Data Persebaran Pokdakan Kabupaten Banyumas</a>
-                    </span>
-                </div>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="navbar-toggler-icon"></span>
+                            Menu
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="/">Home</a>
@@ -55,7 +58,7 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">Tentang Website</h1>
-                <p>Isi halaman "Tentang" Anda disini...</p>
+                <p>Website Sistem Informasi Geografis (SIG) Persebaran Pokdakan Kabupaten Banyumas merupakan platform digital yang dirancang untuk memetakan dan mengelola data kelompok pembudi daya ikan (Pokdakan) di wilayah Kabupaten Banyumas. Melalui website ini, pengguna dapat dengan mudah mengakses informasi terkini mengenai lokasi dan profil kelompok Pokdakan yang tersebar di seluruh kabupaten. Dengan tampilan yang responsif dan antarmuka yang user-friendly, website ini menyediakan fitur pencarian dan pemetaan interaktif menggunakan teknologi Leaflet, memungkinkan pengguna untuk menavigasi peta dan melihat detail kelompok secara langsung. Selain itu, terdapat juga fitur untuk menambah, mengedit, dan menghapus data kelompok, yang memudahkan pengelolaan informasi oleh admin. Dengan adanya website ini, diharapkan dapat mendukung pengembangan sektor perikanan di Banyumas melalui penyediaan data yang akurat dan mudah diakses.</p>
             </div>
         </div>
     </div>

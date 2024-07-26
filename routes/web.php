@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\KelompokController;
 
@@ -10,8 +11,9 @@ Route::get('/', [KelompokController::class, 'index'])->name('kelompok.index');
 // Rute untuk halaman input
 Route::get('/input', [KelompokController::class, 'create'])->name('kelompok.create');
 
+// Hapus salah satu dari dua rute berikut:
 // Rute untuk menyimpan data dari halaman input
-Route::post('/input', [KelompokController::class, 'store'])->name('kelompok.store');
+// Route::post('/input', [KelompokController::class, 'store'])->name('kelompok.store');
 
 // Rute untuk menyimpan data baru
 Route::post('/kelompok/store', [KelompokController::class, 'store'])->name('kelompok.store');
@@ -27,3 +29,12 @@ Route::get('/edit/{id}', [KelompokController::class, 'edit'])->name('kelompok.ed
 
 // Rute untuk mengupdate data
 Route::put('/update/{id}', [KelompokController::class, 'update'])->name('kelompok.update');
+
+// Rute untuk login dan logout
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/edit/{id}', [KelompokController::class, 'edit'])->middleware('auth');
+
+Route::delete('/kelompok/{id}', [KelompokController::class, 'destroy'])->name('kelompok.destroy');

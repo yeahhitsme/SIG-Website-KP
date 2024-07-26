@@ -90,8 +90,7 @@
                     <div id="map" style="height: 400px;" class="mb-3"></div>
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
                     <button type="submit" class="btn btn-primary btn-block mb-2">Simpan Perubahan</button>
-                    <button type="button" class="btn btn-danger btn-block mb-2" onclick="confirmDelete()">Hapus Data</button>
-                    <button type="button" class="btn btn-batal btn-block" onclick="window.location.href='{{ route('kelompok.index') }}'">Batal</button>
+                    <button type="button" class="btn btn-danger btn-block" onclick="batal()">Batal</button>
                     </form>
                     <div class="form-group-last"></div>
                 </form>
@@ -127,23 +126,6 @@
             } else {
                 alert('Masukkan koordinat terlebih dahulu.');
             }
-        }
-
-        function confirmDelete() {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: 'Data ini akan dihapus secara permanen!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('formHapus').submit();
-                }
-            });
         }
     </script>
 </body>

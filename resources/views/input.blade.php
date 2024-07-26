@@ -8,7 +8,7 @@
     <title>Tambah Data Kelompok</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.min.css">
     <style>
         #map { height: 400px; }
         .btn-tampilkan-lokasi {
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="koordinat_lokasi">Koordinat Lokasi</label>
-                        <input type="text" class="form-control" id="koordinat_lokasi" name="koordinat_lokasi" placeholder="Masukkan Koordinat Lokasi (contoh: -7.345, 110.454)" required>
+                        <input type="text" class="form-control" id="koordinat_lokasi" name="koordinat_lokasi" placeholder="Masukkan Koordinat Lokasi (contoh: -7.422848875203752, 109.24185349485774)" required>
                     </div>
                     <div class="form-group">
                         <label for="jenis_budidaya">Jenis Budidaya</label>
@@ -80,7 +80,7 @@
                         <label for="bantuan">Tahun Terakhir Menerima Bantuan</label>
                         <input type="text" class="form-control" id="bantuan" name="bantuan" placeholder="Masukkan Tahun">
                     </div>
-                    <div id="map" style="height: 400px;" class="mb-3"></div>
+                    <div id="map" class="mb-3"></div>
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
                     <button type="button" class="btn btn-primary btn-block mb-2" onclick="simpanData()">Simpan</button>
                     <button type="button" class="btn btn-danger btn-block" onclick="batal()">Batal</button>
@@ -91,17 +91,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.all.min.js"></script>
     <script>
-        var map = L.map('map').setView([-7.345, 110.454], 13); // contoh koordinat pusat peta
+        var map = L.map('map').setView([-7.422848875203752, 109.24185349485774], 13); // contoh koordinat pusat peta
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
 
-        var marker = L.marker([-7.345, 110.454]).addTo(map); // Marker awal
+        var marker = L.marker([-7.422848875203752, 109.24185349485774]).addTo(map); // Marker awal
 
         function updateMap() {
             var koordinat = document.getElementById('koordinat_lokasi').value;
@@ -113,10 +113,10 @@
                     map.setView([lat, lng], 13);
                     marker.setLatLng([lat, lng]);
                 } else {
-                    alert('Format koordinat salah. Gunakan format angka yang sesuai, misal: -7.345, 110.454');
+                    Swal.fire('Format koordinat salah', 'Gunakan format angka yang sesuai, misal: -7.345, 110.454', 'error');
                 }
             } else {
-                alert('Masukkan koordinat terlebih dahulu.');
+                Swal.fire('Koordinat Tidak Ditemukan', 'Masukkan koordinat terlebih dahulu.', 'warning');
             }
         }
 

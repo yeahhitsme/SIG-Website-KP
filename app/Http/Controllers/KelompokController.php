@@ -7,6 +7,11 @@ use App\Models\Kelompok;
 
 class KelompokController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index'); // Tambahkan middleware auth, kecuali untuk index
+    }
+
     public function index()
     {
         $kelompokData = Kelompok::all();
@@ -47,8 +52,8 @@ class KelompokController extends Controller
 
         // Redirect ke halaman utama dengan pesan sukses
         return redirect('/')->with('success', 'Data berhasil disimpan!');
-    } 
-    
+    }
+
     public function edit($id)
     {
         $kelompok = Kelompok::findOrFail($id);
@@ -82,5 +87,12 @@ class KelompokController extends Controller
 
         // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('kelompok.index')->with('success', 'Data Kelompok berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $kelompok = Kelompok::findOrFail($id);
+        $kelompok->delete();
+        return response()->json(['message' => 'Data berhasil dihapus.']);
     }
 }
