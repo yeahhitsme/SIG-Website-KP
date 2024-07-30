@@ -69,7 +69,7 @@
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="btn btn-link nav-link" style="color: #fff;">Logout</button>
+                            <button type="submit" class="btn btn-light nav-link" style="color: #000;">Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -77,7 +77,7 @@
                 @guest
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" style="color: #fff;">Login</a>
+                        <a class="btn btn-light" href="{{ route('login') }}" style="color: #000;">Login</a>
                     </li>
                 </ul>
                 @endguest
