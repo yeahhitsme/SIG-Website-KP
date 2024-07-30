@@ -92,6 +92,8 @@
                     <select id="searchCriteria" class="form-control mb-3" style="max-width: 200px;">
                         <option value="nama_kelompok">Nama Kelompok</option>
                         <option value="alamat">Alamat</option>
+                        <option value="jenis_budidaya">Jenis Budidaya</option>
+                        <option value="jenis_komoditas">Jenis Ikan</option>
                     </select>
                     <input type="text" id="searchInput" class="form-control mb-3 ml-2 flex-grow-1" placeholder="Cari..." style="max-width: 500px;">
                 </div>
@@ -253,7 +255,6 @@
         });
     });
     @endauth
-
         markers.push({ marker: marker, kelompok: kelompok });
     });
 
@@ -307,7 +308,7 @@
         });
     }
 
-    // Fungsi untuk pencarian dan zoom
+        // Fungsi untuk pencarian dan zoom
     $('#searchInput').on('input', function() {
         var searchQuery = $(this).val().toLowerCase();
         var searchCriteria = $('#searchCriteria').val();
@@ -317,8 +318,8 @@
             // Reset to initial view and show all markers
             map.setView(initialView.center, initialView.zoom);
             markers.forEach(function(item) {
-                item.marker.addTo(map);
-            });
+            item.marker.addTo(map);
+        });
         } else {
             markers.forEach(function(item) {
                 var kelompok = item.kelompok;
@@ -328,7 +329,11 @@
                     isMatch = kelompok.nama_kelompok.toLowerCase().includes(searchQuery);
                 } else if (searchCriteria === 'alamat') {
                     isMatch = kelompok.alamat.toLowerCase().includes(searchQuery);
-                } 
+                } else if (searchCriteria === 'jenis_budidaya') {
+                    isMatch = kelompok.jenis_budidaya.toLowerCase().includes(searchQuery);
+                } else if (searchCriteria === 'jenis_komoditas') {
+                    isMatch = kelompok.jenis_komoditas.toLowerCase().includes(searchQuery);
+                }
 
                 if (isMatch) {
                     item.marker.addTo(map);
