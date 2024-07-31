@@ -93,7 +93,7 @@
                         <option value="nama_kelompok">Nama Kelompok</option>
                         <option value="alamat">Alamat</option>
                         <option value="jenis_budidaya">Jenis Budidaya</option>
-                        <option value="jenis_komoditas">Jenis Ikan</option>
+                        <option value="jenis_komoditas">Jenis Komoditas</option>
                     </select>
                     <input type="text" id="searchInput" class="form-control mb-3 ml-2 flex-grow-1" placeholder="Cari..." style="max-width: 500px;">
                 </div>
@@ -103,6 +103,7 @@
                 @auth
                 <div class="text-center mt-4">
                     <a href="/input" class="btn btn-primary mb-4">Tambah Data Kelompok</a>
+                    <a href="/data" class="btn btn-secondary mb-4 ml-2">Halaman Data</a>
                 </div>
                 @endauth
             </div>
@@ -308,7 +309,7 @@
         });
     }
 
-        // Fungsi untuk pencarian dan zoom
+    // Fungsi untuk pencarian dan zoom
     $('#searchInput').on('input', function() {
         var searchQuery = $(this).val().toLowerCase();
         var searchCriteria = $('#searchCriteria').val();

@@ -95,4 +95,24 @@ class KelompokController extends Controller
         $kelompok->delete();
         return response()->json(['message' => 'Data berhasil dihapus.']);
     }
+
+    // Metode untuk menampilkan data dalam bentuk tabel
+    public function showData()
+    {
+        $kelompokData = Kelompok::all();
+        return view('data', compact('kelompokData'));
+    }
+
+    // Metode untuk menghapus beberapa data
+    public function destroyMultiple(Request $request)
+    {
+        $ids = $request->input('ids');
+
+        if (is_array($ids)) {
+            Kelompok::whereIn('id', $ids)->delete();
+            return response()->json(['message' => 'Data berhasil dihapus.']);
+        }
+
+        return response()->json(['message' => 'Data tidak ditemukan.'], 404);
+    }
 }

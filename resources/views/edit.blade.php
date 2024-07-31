@@ -90,7 +90,7 @@
                     <div id="map" style="height: 400px;" class="mb-3"></div>
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
                     <button type="submit" class="btn btn-primary btn-block mb-2">Simpan Perubahan</button>
-                    <button type="button" class="btn btn-danger btn-block" onclick="batal()">Batal</button>
+                    <button type="button" class="btn btn-danger btn-block" id="btnBatal" data-previous-url="{{ url()->previous() }}">Batal</button>
                     </form>
                     <div class="form-group-last"></div>
                 </form>
@@ -127,6 +127,11 @@
                 alert('Masukkan koordinat terlebih dahulu.');
             }
         }
+
+        document.getElementById('btnBatal').addEventListener('click', function() {
+        var previousUrl = this.getAttribute('data-previous-url');
+        window.location.href = previousUrl;
+        });
     </script>
 </body>
 </html>

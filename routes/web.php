@@ -11,10 +11,6 @@ Route::get('/', [KelompokController::class, 'index'])->name('kelompok.index');
 // Rute untuk halaman input
 Route::get('/input', [KelompokController::class, 'create'])->name('kelompok.create');
 
-// Hapus salah satu dari dua rute berikut:
-// Rute untuk menyimpan data dari halaman input
-// Route::post('/input', [KelompokController::class, 'store'])->name('kelompok.store');
-
 // Rute untuk menyimpan data baru
 Route::post('/kelompok/store', [KelompokController::class, 'store'])->name('kelompok.store');
 
@@ -23,6 +19,9 @@ Route::get('/tentang', [PageController::class, 'tentang'])->name('tentang');
 
 // Rute untuk halaman petunjuk
 Route::get('/petunjuk', [PageController::class, 'petunjuk'])->name('petunjuk');
+
+// Rute untuk menampilkan halaman data
+Route::get('/data', [KelompokController::class, 'showData'])->name('data.show');
 
 // Rute untuk menampilkan halaman edit
 Route::get('/edit/{id}', [KelompokController::class, 'edit'])->name('kelompok.edit');
@@ -38,3 +37,4 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/edit/{id}', [KelompokController::class, 'edit'])->middleware('auth');
 
 Route::delete('/kelompok/{id}', [KelompokController::class, 'destroy'])->name('kelompok.destroy');
+Route::delete('/kelompok', [KelompokController::class, 'destroyMultiple'])->name('kelompok.destroyMultiple');

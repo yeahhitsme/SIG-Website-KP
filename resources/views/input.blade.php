@@ -25,7 +25,12 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Tambah Data Kelompok</h2>
+                <div class="header-container mb-3">
+                    <a class="back-arrow" href="{{ url('/') }}">
+                        &larr;
+                    </a>
+                    <h2 class="header-title ml-3">Kelola Data</h2>
+                </div>
                 <form id="formInput" action="{{ route('kelompok.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
