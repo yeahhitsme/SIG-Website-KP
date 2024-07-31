@@ -92,8 +92,6 @@
                     <select id="searchCriteria" class="form-control mb-3" style="max-width: 200px;">
                         <option value="nama_kelompok">Nama Kelompok</option>
                         <option value="alamat">Alamat</option>
-                        <option value="jenis_budidaya">Jenis Budidaya</option>
-                        <option value="jenis_komoditas">Jenis Komoditas</option>
                     </select>
                     <input type="text" id="searchInput" class="form-control mb-3 ml-2 flex-grow-1" placeholder="Cari..." style="max-width: 500px;">
                 </div>
@@ -330,10 +328,6 @@
                     isMatch = kelompok.nama_kelompok.toLowerCase().includes(searchQuery);
                 } else if (searchCriteria === 'alamat') {
                     isMatch = kelompok.alamat.toLowerCase().includes(searchQuery);
-                } else if (searchCriteria === 'jenis_budidaya') {
-                    isMatch = kelompok.jenis_budidaya.toLowerCase().includes(searchQuery);
-                } else if (searchCriteria === 'jenis_komoditas') {
-                    isMatch = kelompok.jenis_komoditas.toLowerCase().includes(searchQuery);
                 }
 
                 if (isMatch) {

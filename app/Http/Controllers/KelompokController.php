@@ -57,7 +57,8 @@ class KelompokController extends Controller
     public function edit($id)
     {
         $kelompok = Kelompok::findOrFail($id);
-        return view('edit', ['kelompok' => $kelompok]);
+        session(['redirect_to' => url()->previous()]);
+        return view('edit', compact('kelompok'));
     }
 
     public function update(Request $request, $id)
@@ -86,7 +87,7 @@ class KelompokController extends Controller
         $kelompok->update($request->all());
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('kelompok.index')->with('success', 'Data Kelompok berhasil diperbarui.');
+        return redirect($request->input('redirect_to'))->with('success', 'Data kelompok berhasil diperbarui');
     }
 
     public function destroy($id)

@@ -56,8 +56,8 @@
     </nav>
 
     <div class="container mt-3">
-        <div class="d-flex mb-3">
-            <input type="text" id="searchInput" class="form-control mr-2" placeholder="Cari...">
+        <div class="d-flex justify-content-between mb-3">
+            <input type="text" id="searchInput" class="form-control mr-2" style="width: 300px;" placeholder="Cari...">
             <button id="btnDeleteSelected" class="btn btn-danger">Hapus</button>
         </div>
         <div class="table-container">

@@ -19,18 +19,41 @@
         .form-group-last {
             margin-bottom: 20px; /* Margin bawah tambahan di bawah tombol Simpan */
         }
+        .navbar-custom {
+            background-color: #007bff; /* Warna biru */
+            padding: 0.5rem 1rem; /* Padding untuk navbar */
+        }
+        .navbar-custom .navbar-brand {
+            color: #fff; /* Warna teks putih */
+            font-size: 1.5rem; /* Ukuran font untuk ikon */
+            font-weight: bold; /* Bold untuk ikon */
+        }
+        .navbar-custom .navbar-brand:hover {
+            color: #e0e0e0; /* Warna putih terang saat hover */
+        }
+        .navbar-custom .navbar-text {
+            color: #fff; /* Warna teks putih */
+            margin-left: 0.5rem; /* Jarak antara ikon dan teks */
+            font-size: 1.5rem; /* Ukuran font untuk "Kelola Data" */
+            font-weight: bold; /* Bold untuk teks */
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            &larr;
+        </a>
+        <span class="navbar-text">
+            Tambah Data 
+        </span>
+    </nav>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <div class="header-container mb-3">
-                    <a class="back-arrow" href="{{ url('/') }}">
-                        &larr;
-                    </a>
-                    <h2 class="header-title ml-3">Kelola Data</h2>
-                </div>
+                <h2 class="text-center">Tambah Data Kelompok</h2>
                 <form id="formInput" action="{{ route('kelompok.store') }}" method="POST">
                     @csrf
                     <div class="form-group">

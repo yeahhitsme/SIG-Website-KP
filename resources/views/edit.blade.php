@@ -25,9 +25,37 @@
         .btn-batal:hover {
             background-color: #e9ecef;
         }
+        .navbar-custom {
+            background-color: #007bff; /* Warna biru */
+            padding: 0.5rem 1rem; /* Padding untuk navbar */
+        }
+        .navbar-custom .navbar-brand {
+            color: #fff; /* Warna teks putih */
+            font-size: 1.5rem; /* Ukuran font untuk ikon */
+            font-weight: bold; /* Bold untuk ikon */
+        }
+        .navbar-custom .navbar-brand:hover {
+            color: #e0e0e0; /* Warna putih terang saat hover */
+        }
+        .navbar-custom .navbar-text {
+            color: #fff; /* Warna teks putih */
+            margin-left: 0.5rem; /* Jarak antara ikon dan teks */
+            font-size: 1.5rem; /* Ukuran font untuk "Kelola Data" */
+            font-weight: bold; /* Bold untuk teks */
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            &larr;
+        </a>
+        <span class="navbar-text">
+            Edit Data 
+        </span>
+    </nav>
+    
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
@@ -35,6 +63,8 @@
                 <form id="formEdit" action="{{ route('kelompok.update', $kelompok->id) }}" method="POST">
                     @csrf
                     @method('PUT')
+                    <!-- Tambahkan input hidden untuk menyimpan URL asal -->
+                    <input type="hidden" name="redirect_to" value="{{ session('redirect_to') }}">
                     <div class="form-group">
                         <label for="nama_kelompok">Nama Kelompok</label>
                         <input type="text" class="form-control" id="nama_kelompok" name="nama_kelompok" value="{{ $kelompok->nama_kelompok }}" placeholder="Masukkan Nama Kelompok" required>
@@ -91,7 +121,6 @@
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
                     <button type="submit" class="btn btn-primary btn-block mb-2">Simpan Perubahan</button>
                     <button type="button" class="btn btn-danger btn-block" id="btnBatal" data-previous-url="{{ url()->previous() }}">Batal</button>
-                    </form>
                     <div class="form-group-last"></div>
                 </form>
             </div>
@@ -129,8 +158,8 @@
         }
 
         document.getElementById('btnBatal').addEventListener('click', function() {
-        var previousUrl = this.getAttribute('data-previous-url');
-        window.location.href = previousUrl;
+            var previousUrl = this.getAttribute('data-previous-url');
+            window.location.href = previousUrl;
         });
     </script>
 </body>
