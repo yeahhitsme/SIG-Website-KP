@@ -1,5 +1,3 @@
-<!-- resources/views/input.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +25,8 @@
             color: #fff; /* Warna teks putih */
             font-size: 1.5rem; /* Ukuran font untuk ikon */
             font-weight: bold; /* Bold untuk ikon */
+            display: flex;
+            align-items: center;
         }
         .navbar-custom .navbar-brand:hover {
             color: #e0e0e0; /* Warna putih terang saat hover */
@@ -37,16 +37,32 @@
             font-size: 1.5rem; /* Ukuran font untuk "Kelola Data" */
             font-weight: bold; /* Bold untuk teks */
         }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            &larr;
+        <a class="btn-back" href="{{ url('/') }}">
+            &lt;
         </a>
         <span class="navbar-text">
-            Tambah Data 
+            Tambah Data
         </span>
     </nav>
 

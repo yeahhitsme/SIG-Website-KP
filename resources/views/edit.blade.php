@@ -28,11 +28,18 @@
         .navbar-custom {
             background-color: #007bff; /* Warna biru */
             padding: 0.5rem 1rem; /* Padding untuk navbar */
+            position: relative;
+        }
+        .navbar-custom {
+            background-color: #007bff; /* Warna biru */
+            padding: 0.5rem 1rem; /* Padding untuk navbar */
         }
         .navbar-custom .navbar-brand {
             color: #fff; /* Warna teks putih */
             font-size: 1.5rem; /* Ukuran font untuk ikon */
             font-weight: bold; /* Bold untuk ikon */
+            display: flex;
+            align-items: center;
         }
         .navbar-custom .navbar-brand:hover {
             color: #e0e0e0; /* Warna putih terang saat hover */
@@ -43,13 +50,29 @@
             font-size: 1.5rem; /* Ukuran font untuk "Kelola Data" */
             font-weight: bold; /* Bold untuk teks */
         }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            &larr;
+        <a class="btn-back" href="{{ url('/') }}">
+            &lt;
         </a>
         <span class="navbar-text">
             Edit Data 
@@ -117,7 +140,7 @@
                         <label for="bantuan">Tahun Terakhir Menerima Bantuan</label>
                         <input type="text" class="form-control" id="bantuan" name="bantuan" value="{{ $kelompok->bantuan }}" placeholder="Masukkan Tahun">
                     </div>
-                    <div id="map" style="height: 400px;" class="mb-3"></div>
+                    <div id="map" class="mb-3"></div>
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
                     <button type="submit" class="btn btn-primary btn-block mb-2">Simpan Perubahan</button>
                     <button type="button" class="btn btn-danger btn-block" id="btnBatal" data-previous-url="{{ url()->previous() }}">Batal</button>
@@ -131,7 +154,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
         var map = L.map('map').setView([{{ explode(',', $kelompok->koordinat_lokasi)[0] }}, {{ explode(',', $kelompok->koordinat_lokasi)[1] }}], 13); // Koordinat dari data
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -150,10 +173,10 @@
                     map.setView([lat, lng], 13);
                     marker.setLatLng([lat, lng]);
                 } else {
-                    alert('Format koordinat salah. Gunakan format angka yang sesuai, misal: -7.345, 110.454');
+                    Swal.fire('Format koordinat salah', 'Gunakan format angka yang sesuai, misal: -7.345, 110.454', 'error');
                 }
             } else {
-                alert('Masukkan koordinat terlebih dahulu.');
+                Swal.fire('Koordinat Tidak Ditemukan', 'Masukkan koordinat terlebih dahulu.', 'warning');
             }
         }
 
