@@ -101,7 +101,7 @@
                 @auth
                 <div class="text-center mt-4">
                     <a href="/input" class="btn btn-primary mb-4">Tambah Data Kelompok</a>
-                    <a href="/data" class="btn btn-secondary mb-4 ml-2">Halaman Data</a>
+                    <a href="/data" class="btn btn-secondary mb-4 ml-2">Kelola Data</a>
                 </div>
                 @endauth
             </div>
