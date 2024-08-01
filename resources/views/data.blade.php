@@ -300,44 +300,44 @@
             };
         });
 
-        // Delete Selected Button
-        $('#btnDeleteSelected').on('click', function() {
-            var selectedIds = $('.select-item:checked').map(function() {
-                return $(this).val();
-            }).get();
+        // Hapus Data Terpilih
+$('#btnDeleteSelected').on('click', function() {
+    var selectedIds = $('.select-item:checked').map(function() {
+        return $(this).val();
+    }).get();
 
-            if (selectedIds.length === 0) {
-                Swal.fire('Peringatan', 'Tidak ada data yang dipilih untuk dihapus', 'warning');
-                return;
-            }
+    if (selectedIds.length === 0) {
+        Swal.fire('Peringatan', 'Tidak ada data yang dipilih untuk dihapus', 'warning');
+        return;
+    }
 
-            Swal.fire({
-                title: 'Konfirmasi',
-                text: 'Apakah Anda yakin ingin menghapus data yang dipilih?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '/delete',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            ids: selectedIds
-                        },
-                        success: function(response) {
-                            Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
-                            location.reload();
-                        },
-                        error: function(xhr) {
-                            Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
-                        }
-                    });
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin menghapus data yang dipilih?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Hapus',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '{{ route("kelompok.destroyMultiple") }}',
+                method: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    ids: selectedIds
+                },
+                success: function(response) {
+                    Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
+                    location.reload();
+                },
+                error: function(xhr) {
+                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
                 }
             });
-        });
+        }
+    });
+});
 
         // Restore selected checkboxes on document load
         restoreSelectedCheckboxes();
@@ -348,33 +348,34 @@
         window.location.href = '/edit/' + id;
     }
 
-    function deleteData(id) {
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Hapus',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/delete/' + id,
-                    method: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
-                        location.reload();
-                    },
-                    error: function(xhr) {
-                        Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
-                    }
-                });
-            }
-        });
-    }
+    // Hapus Data Per Baris
+function deleteData(id) {
+    Swal.fire({
+        title: 'Konfirmasi',
+        text: 'Apakah Anda yakin ingin menghapus data ini?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Hapus',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/kelompok/' + id,
+                method: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
+                    location.reload();
+                },
+                error: function(xhr) {
+                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
+                }
+            });
+        }
+    });
+}
 </script>
 </body>
 </html>
