@@ -27,6 +27,10 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        .navbar-brand-text {
+            display: block;
+            text-align: center;
+        }
         @media (max-width: 767px) {
             .search-container {
                 flex-direction: column;
@@ -50,7 +54,10 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Data Persebaran Pokdakan Kabupaten Banyumas</a>
+            <a class="navbar-brand" href="#">
+                <span class="navbar-brand-text">Data Persebaran Pokdakkan</span>
+                <span class="navbar-brand-text">Dinas Perikanan dan Peternakan Kabupaten Banyumas</span>
+            </a>
             <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarToggle">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">

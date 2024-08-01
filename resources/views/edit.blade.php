@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         #map { height: 400px; }
         .btn-tampilkan-lokasi {
@@ -72,7 +73,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="btn-back" href="{{ url('/') }}">
-            &lt;
+            <i class="fa fa-arrow-left"></i>
         </a>
         <span class="navbar-text">
             Edit Data 
@@ -142,7 +143,7 @@
                     </div>
                     <div id="map" class="mb-3"></div>
                     <button type="button" class="btn btn-primary btn-tampilkan-lokasi float-left" onclick="updateMap()">Tampilkan Lokasi</button>
-                    <button type="submit" class="btn btn-primary btn-block mb-2">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-2">Simpan</button>
                     <button type="button" class="btn btn-danger btn-block" id="btnBatal" data-previous-url="{{ url()->previous() }}">Batal</button>
                     <div class="form-group-last"></div>
                 </form>

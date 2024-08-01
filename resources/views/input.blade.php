@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         #map { height: 400px; }
         .btn-tampilkan-lokasi {
@@ -59,7 +60,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="btn-back" href="{{ url('/') }}">
-            &lt;
+            <i class="fa fa-arrow-left"></i>
         </a>
         <span class="navbar-text">
             Tambah Data

@@ -6,6 +6,7 @@
     <title>Data Kelompok</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Style yang sama seperti sebelumnya */
         .navbar-custom {
@@ -124,7 +125,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <a class="btn-back" href="{{ url('/') }}">
-            &lt;
+            <i class="fas fa-arrow-left"></i> <!-- Icon previous page -->
         </a>
         <span class="navbar-text">
             Kelola Data
