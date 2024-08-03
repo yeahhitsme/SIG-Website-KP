@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         #map { height: 450px; }
         .navbar {
@@ -31,6 +32,26 @@
             display: block;
             text-align: center;
         }
+        .search-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .action-buttons a {
+            margin-left: 10px;
+        }
+        .btn-icon {
+            display: flex;
+            align-items: center;
+        }
+        .btn-icon i {
+            margin-right: 5px;
+        }
         @media (max-width: 767px) {
             .search-container {
                 flex-direction: column;
@@ -38,6 +59,17 @@
             .navbar-brand {
                 position: static;
                 transform: none;
+            }
+            .search-container,
+            .action-buttons {
+                justify-content: center;
+            }
+            .search-container {
+                margin-bottom: 10px;
+            }
+            .action-buttons a {
+                margin-left: 0;
+                margin-right: 10px;
             }
         }
         .navbar-nav .nav-item .dropdown-menu {
@@ -93,27 +125,31 @@
     </nav>
 
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="search-container d-flex justify-content-center">
-                    <select id="searchCriteria" class="form-control mb-3" style="max-width: 200px;">
-                        <option value="nama_kelompok">Nama Kelompok</option>
-                        <option value="alamat">Alamat</option>
-                    </select>
-                    <input type="text" id="searchInput" class="form-control mb-3 ml-2 flex-grow-1" placeholder="Cari..." style="max-width: 500px;">
-                </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between">
+            <div class="search-container">
+                <select id="searchCriteria" class="form-control mb-3" style="max-width: 200px;">
+                    <option value="nama_kelompok">Nama Kelompok</option>
+                    <option value="alamat">Alamat</option>
+                </select>
+                <input type="text" id="searchInput" class="form-control mb-3 ml-2" placeholder="Cari..." style="max-width: 500px;">
             </div>
-            <div class="col-12">
-                <div id="map" class="mt-4"></div>
-                @auth
-                <div class="text-center mt-4">
-                    <a href="/input" class="btn btn-primary mb-4">Tambah Data Kelompok</a>
-                    <a href="/data" class="btn btn-secondary mb-4 ml-2">Kelola Data</a>
-                </div>
-                @endauth
+            @auth
+            <div class="action-buttons">
+                <a href="/input" class="btn btn-primary mb-3 btn-icon">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+                <a href="/data" class="btn btn-secondary mb-3 btn-icon">
+                    <i class="fas fa-cogs"></i> Kelola Data
+                </a>
             </div>
+            @endauth
+        </div>
+        <div class="col-12">
+            <div id="map" class="mt-4"></div>
         </div>
     </div>
+</div>
 
     <!-- Modal untuk detail data -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
