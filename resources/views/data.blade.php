@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelompok</title>
+    <title>Kelola Data</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -301,43 +301,43 @@
         });
 
         // Hapus Data Terpilih
-$('#btnDeleteSelected').on('click', function() {
-    var selectedIds = $('.select-item:checked').map(function() {
-        return $(this).val();
-    }).get();
+        $('#btnDeleteSelected').on('click', function() {
+            var selectedIds = $('.select-item:checked').map(function() {
+                return $(this).val();
+            }).get();
 
-    if (selectedIds.length === 0) {
-        Swal.fire('Peringatan', 'Tidak ada data yang dipilih untuk dihapus', 'warning');
-        return;
-    }
+            if (selectedIds.length === 0) {
+                Swal.fire('Peringatan', 'Tidak ada data yang dipilih untuk dihapus', 'warning');
+                return;
+            }
 
-    Swal.fire({
-        title: 'Konfirmasi',
-        text: 'Apakah Anda yakin ingin menghapus data yang dipilih?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Hapus',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '{{ route("kelompok.destroyMultiple") }}',
-                method: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    ids: selectedIds
-                },
-                success: function(response) {
-                    Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
-                    location.reload();
-                },
-                error: function(xhr) {
-                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menghapus data yang dipilih?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route("kelompok.destroyMultiple") }}',
+                        method: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            ids: selectedIds
+                        },
+                        success: function(response) {
+                            Swal.fire('Berhasil', 'Data berhasil dihapus', 'success');
+                            location.reload();
+                        },
+                        error: function(xhr) {
+                            Swal.fire('Error', 'Terjadi kesalahan saat menghapus data', 'error');
+                        }
+                    });
                 }
             });
-        }
-    });
-});
+        });
 
         // Restore selected checkboxes on document load
         restoreSelectedCheckboxes();
