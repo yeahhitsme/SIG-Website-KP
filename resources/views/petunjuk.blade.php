@@ -1,4 +1,3 @@
-<!-- resources/views/petunjuk.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
     <title>Petunjuk Penggunaan Website</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     <style>
         .navbar {
             background-color: #007bff;
@@ -23,6 +22,9 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+        }
+        p {
+            text-align: justify;
         }
     </style>
 </head>
@@ -55,30 +57,66 @@
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">Petunjuk Penggunaan Website</h1>
-                <div style="text-align: justify;">
-                    <ol>
-                        <li>
-                            <strong>Menampilkan Peta Persebaran:</strong> 
-                            <p>Buka halaman utama untuk melihat peta persebaran kelompok pembudi daya ikan di Kabupaten Banyumas. Pada peta, Anda dapat melihat lokasi setiap kelompok dengan ikon penanda (marker).</p>
-                        </li>
-                        <li>
-                            <strong>Pencarian Data Kelompok:</strong> 
-                            <p>Gunakan kolom pencarian di bagian atas peta untuk mencari kelompok berdasarkan nama atau alamat. Pilih kriteria pencarian dari dropdown dan masukkan kata kunci pada kolom pencarian.</p>
-                        </li>
-                        <li>
-                            <strong>Menampilkan Detail Kelompok:</strong> 
-                            <p>Klik pada penanda (marker) di peta untuk menampilkan detail kelompok. Informasi yang ditampilkan mencakup nama kelompok, alamat, jumlah anggota, nama ketua, nomor HP, koordinat lokasi, jenis budidaya, jenis komoditas, tanggal SK, luas lahan, produksi per siklus, jumlah siklus per tahun, dan bantuan yang diterima.</p>
-                        </li>
-                    </ol>
+                <p id="dynamic-content">{{ $petunjukContent }}</p>
+                @auth
+                <button class="btn btn-primary" onclick="showEditModal()">Edit</button>
+                @endauth
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Konten Petunjuk</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="content" class="form-control" rows="10">{{ $petunjukContent }}</textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" onclick="updateContent()">Simpan</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <script>
+        function showEditModal() {
+            $('#editModal').modal('show');
+        }
+
+        function updateContent() {
+            const content = $('#content').val();
+
+            $.ajax({
+                url: '/petunjuk/update',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    content: content
+                },
+                success: function(response) {
+                    $('#dynamic-content').text(content);
+                    $('#editModal').modal('hide');
+                    Swal.fire('Sukses', 'Konten berhasil diperbarui', 'success');
+                },
+                error: function() {
+                    Swal.fire('Gagal', 'Terjadi kesalahan', 'error');
+                }
+            });
+        }
+    </script>
 </body>
-</html
+</html>

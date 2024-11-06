@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\KelompokController;
+use App\Http\Controllers\TentangController;
+use App\Http\Controllers\PetunjukController;
 
 // Rute untuk menampilkan halaman utama
 Route::get('/', [KelompokController::class, 'index'])->name('kelompok.index');
@@ -38,3 +40,12 @@ Route::get('/edit/{id}', [KelompokController::class, 'edit'])->middleware('auth'
 
 Route::delete('/kelompok/{id}', [KelompokController::class, 'destroy'])->name('kelompok.destroy');
 Route::delete('/kelompok', [KelompokController::class, 'destroyMultiple'])->name('kelompok.destroyMultiple');
+
+Route::get('/tentang', [TentangController::class, 'showTentang'])->name('tentang.show');
+Route::post('/tentang/update', [TentangController::class, 'updateContent'])->name('tentang.update');
+
+Route::get('/petunjuk', [PetunjukController::class, 'showPetunjuk'])->name('petunjuk.show');
+Route::post('/petunjuk/update', [PetunjukController::class, 'updateContent'])->name('petunjuk.update');
+
+Route::get('/petunjuk', [PetunjukController::class, 'showPetunjuk'])->name('petunjuk.show');
+Route::post('/petunjuk/update', [PetunjukController::class, 'updateContent'])->name('petunjuk.update');
