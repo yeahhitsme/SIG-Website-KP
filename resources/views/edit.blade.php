@@ -67,6 +67,15 @@
         .btn-back:hover {
             background-color: #0056b3;
         }
+        .form-container {
+            background-color: #ffffff; /* Latar belakang putih */
+            border: 1px solid #ddd; /* Border abu-abu ringan */
+            border-radius: 8px; /* Sudut border membulat */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+            padding: 20px; /* Ruang dalam untuk konten */
+            margin: 20px auto; /* Memberikan jarak atas-bawah */
+            max-width: 800px; /* Batas lebar maksimum form */
+        }
     </style>
 </head>
 <body>
@@ -80,6 +89,7 @@
         </span>
     </nav>
     
+    <div class="form-container">
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
@@ -149,6 +159,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>

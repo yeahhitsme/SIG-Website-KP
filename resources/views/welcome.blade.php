@@ -9,74 +9,155 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        #map { height: 450px; }
+        #map {
+            height: 450px;
+            width: 100%; 
+        }
+
         .navbar {
             background-color: #007bff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambah bayangan agar navbar lebih jelas */
         }
+
         .navbar-brand, .navbar-nav .nav-link {
             color: #fff;
         }
-        .dropdown-menu {
-            right: auto;
-            left: 0;
-        }
+
         .navbar-toggler {
             margin-left: 0;
         }
-        .navbar-brand {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .navbar-brand-text {
-            display: block;
-            text-align: center;
-        }
-        .search-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-        .action-buttons a {
-            margin-left: 10px;
-        }
-        .btn-icon {
-            display: flex;
-            align-items: center;
-        }
-        .btn-icon i {
-            margin-right: 5px;
-        }
-        @media (max-width: 767px) {
-            .search-container {
-                flex-direction: column;
-            }
-            .navbar-brand {
-                position: static;
-                transform: none;
-            }
-            .search-container,
-            .action-buttons {
-                justify-content: center;
-            }
-            .search-container {
-                margin-bottom: 10px;
-            }
-            .action-buttons a {
-                margin-left: 0;
-                margin-right: 10px;
-            }
-        }
+
         .navbar-nav .nav-item .dropdown-menu {
             position: absolute;
             will-change: transform;
             overflow: visible;
         }
+
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav .nav-item .dropdown-menu {
+            background-color: #007bff;
+            right: auto;
+            left: 0;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .search-container select,
+        .search-container input {
+            max-width: 200px;
+            margin-right: 10px;
+        }
+
+        .search-container input {
+            width: 100%;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .action-buttons a {
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-icon i {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 767px) {
+            .search-container {
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+
+            .navbar-brand {
+                position: static;
+                transform: none;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+            }
+
+            .action-buttons {
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .action-buttons a {
+                margin: 5px 0;
+            }
+        }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-body p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .custom-tooltip {
+        background-color: rgba(0, 123, 255, 0.7);
+        color: white;
+        font-size: 12px;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    .swal2-popup {
+        font-size: 14px;
+    }
+
+    .swal2-button {
+        font-size: 16px;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc; /* Garis tipis berwarna abu-abu */
+        margin: 10px 0;
+    }
+
+    .form-group {
+        padding-bottom: 15px;
+    }
     </style>
 </head>
 <body>
