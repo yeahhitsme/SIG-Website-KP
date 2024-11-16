@@ -10,18 +10,41 @@
     <style>
         .navbar {
             background-color: #007bff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambah bayangan agar navbar lebih jelas */
         }
+
         .navbar-brand, .navbar-nav .nav-link {
             color: #fff;
         }
-        .dropdown-menu {
-            right: auto;
-            left: 0;
+
+        .navbar-toggler {
+            margin-left: 0;
         }
+
+        .navbar-nav .nav-item .dropdown-menu {
+            position: absolute;
+            will-change: transform;
+            overflow: visible;
+        }
+
         .navbar-brand {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar-nav .nav-item .dropdown-menu {
+            background-color: #007bff;
+            right: auto;
+            left: 0;
         }
         p {
             text-align: justify;
